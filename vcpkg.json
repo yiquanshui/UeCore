@@ -1,0 +1,8 @@
+{
+    "name": "uecore",
+    "version": "1.3.0",
+    "dependencies": [
+        "boost",
+        "libmysql"
+    ]
+}
