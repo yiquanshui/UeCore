@@ -1,10 +1,24 @@
-UeCore全球著名中文魔兽世界服务器开源项目
+UeCore是全球著名的魔兽世界游戏引擎开源项目
 ==============================
-> 魔兽世界是世界上最成功的游戏之一，这是一套完整的服务端源码版本。
+UeCore(Universe Engine Core) is an Open Source MMO RPG Framework World of Warcraft Server Engine (NOT Unreal Engine)
+==============================
+> UeCore是唯一一个持续了十多年的长期开源的国产开源魔兽世界游戏引擎项目，该项目基于最高60级的经典旧世界资料片版本，对应的客户端版本是1.12。
+> 
+> UeCore能够真正的仿官模拟香草魔兽和九辰时代的经典版本，是真正的经典开源魔兽世界服务器开源项目。
+> 
+> UeCore文档资料比较完善，项目比较持久，各类资料支持中文，英文，对中国玩家和全球华人比较友好。
+> 
+> UeCore基础网络通信采用boost版本，数据加密采用openssl，支持gcc各类版本和clang各类版本编译器。
+> 
+> UeCore服务器经过长期的开源和优化，版本成熟稳定，更新比CMangos和Vmangos都要快，并且持续更新优化，bug比较少。是一个纯粹的魔兽世界服务器引擎项目，
+> 
+> UeCore命名的中文含义是：友谊，有益，有义气，有意思，英文含义来自是Universe Engine Core，最终简写为UeCore，与 Unreal Engine 或者 UE 无任何关系。
 
+# introduce
 > 2016年 6月，UeCore开源魔兽世界项目正式启动
 
 > 2017年 1月，UeCore进入正式开源开发阶段
+
 > 2018年 3月，支持Lua Engine
 
 > 2019年12月，UeCore发布第一个版本
@@ -13,7 +27,7 @@ UeCore全球著名中文魔兽世界服务器开源项目
 
 > 2020年 3月，支持Player Bot
 
-> 2020年12月，支持Npc Bot
+> 2020年12月，支持Lua脚本
 
 > 2021年 6月，UeCore官网已经正式发布魔兽世界服务器
 
@@ -27,14 +41,18 @@ UeCore全球著名中文魔兽世界服务器开源项目
 
 > 2024年 3月，开发全新的世界Boss
 
-> 2024年 5月，重构60，70团队副本。
+> 2024年 5月，重构60团队副本。
 
+> 2025年 3月，优化部署文档。
 
+> 2025年 11月，加入NpcBot机器人。
+
+> 2026年 1月，发布RPM包一键安装版1.4
 
 ![登录入口](https://github.com/geektcp/UeCore/blob/master/screen/door.png)
 
 # website
-<a href="http://uewow.com" target="_blank">UeCore开源友谊魔兽世界社区论坛</a>
+<a href="http://uecore.org" target="_blank">UeCore开源UeCore魔兽世界社区论坛</a>
 <br/>
 
 # overview
@@ -45,25 +63,70 @@ UeCore全球著名中文魔兽世界服务器开源项目
 https://github.com/geektcp/UeCore.git
 
 任何技术问题直接在issue提问。直接把问题和期望写清楚)，每周定期回复
-
-技术qq群： 153459822
 ```
 
-## bbs
+<a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=lUPEtyE55iYo5LxuCLWPfwYCc0KJ-12A&authKey=V5OyPonKbW7ZLuUc52yaIqNBUjVDthYfFMLYH701gm7hTXVsX57XunVls77UbbuX&noverify=0&group_code=153459822" target="_blank">技术交流QQ群： 153459822</a>
+
+## difference
+| 项目               | 核心定位             | 目标用户           | 核心特色              | 长期演进性     |
+| ------------------ | --------------       | -----------        | -----------           | ---------      |
+| **MaNGOS**         | 开源 WoW 服务端祖宗   | 研究 / 开服         | 原始开源，行为复刻     | 低              |
+| **mangos-classic** | 60 旧世可用服务端     | 游戏运营者          | 可开服、稳定           | 中              |
+| **VMaNGOS**        | 1.12 官方行为复刻     | 硬核研究            | 精准还原官方行为       | 低/难改          |
+| **TrinityCore**    | 工业级通用 WoW 服务端  | 开服 / 商业服       | 模块化、可扩展、社区大 | 高（但有历史包袱） |
+| **UeCore**         | MMO 引擎化 / 架构抽象  | 硬核研究 / 引擎项目 | 抽象、模块化、长远演进  | 高（重构）        |
+| **AzerothCore**    | MMO 引擎化            | 引擎项目            | 抽象、模块化、维持现状  | 停止演进          |
+
+
+**核心概念：**
+
+* **VMaNGOS = 历史还原**
+* **TrinityCore = 工业级平台**
+* **mangos-classic = 可靠但陈旧的运行平台**
+* **UeCore = 引擎级重构 / 工业级平台**
+
+| 维度    | MaNGOS   | mangos-classic  | VMaNGOS        | TrinityCore | UeCore        |  AzerothCore 
+| ----- | ------      | --------------  | -------       | ----------- | --------      | --------       |
+| 客户端版本 | 1.12    |  1.12           |  1.12   |  3.3.5/4.35/11.2   |  1.12         | 3.3.5         |
+| 基础组件   | Socket  | Socket          |  ACE           | Boost       |  Boost        | Boost         |
+| 模块化    | 低        | 中              | 中            | 高           | 高            | 高            |
+| 数据驱动  | 低       | 中              | 低            | 高           | 高             | 中            |
+| 行为还原  | ⭐⭐⭐  | ⭐⭐          | ⭐⭐⭐⭐⭐  | ⭐⭐⭐     | ⭐⭐⭐⭐⭐  | ⭐⭐⭐⭐    |
+| 可扩展玩法 | ⭐      | ⭐⭐⭐        | ⭐           | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐  | ⭐⭐⭐      |
+| 发起者国家 | 瑞士     | 瑞士            |  德国         | 美国         | 中国           | 法国          |
+| 社区活跃  | 高       |低               |  中           | 高           | 高             | 中            |
+| 改动风险  | 高       | 中              | 极高          | 中           | 高              | 中            |
+| 开服可用性 | ⭐⭐   | ⭐⭐⭐⭐      | ⭐           | ⭐⭐⭐⭐   | ⭐⭐⭐⭐     |⭐⭐⭐       |
+| 技术门槛  | 中       | 中              | 高            | 高           | 极高            | 中            |
+| 更新频率  | 中       | 中              | 高            | 高           | 高              | 低            |
+| 文档完整性 | 中       | 中              | 高            | 高           | 高             | 高            |
+| 引擎稳定性 | ⭐⭐   | ⭐⭐           | ⭐⭐⭐       | ⭐⭐⭐⭐   | ⭐⭐⭐⭐     | ⭐⭐⭐      |
+| 服务器性能 | ⭐⭐   | ⭐⭐           | ⭐⭐⭐⭐     | ⭐⭐⭐     | ⭐⭐⭐⭐     | ⭐⭐⭐      |
+
+
+## issue
 ```
 各位有专业问题，尽量在issue留言讨论，留言后可以发QQ消息给作者或管理员提醒回复。
 
 有很多问题往往一句话说不清楚或者描述不清楚。还有很多问题的回复也未必一次就能讨论清楚。
 谢谢配合。
 
+感谢各位的star，支持和关注，接下来这个项目也会进行持续的更新，大家可以留意动态。
 ```
 
-```
-感谢各位的star，支持和关注，接下来这个项目也会进行持续的更新，大家可以留意动态。
-2023年会发布一个新版本，基于CentOS7.x的版本，并部署到公网，到时候方便大家直接使用。
+## release
+
+<a href="https://github.com/geektcp/UeCore/releases" target="_blank">2023年已经发布一个新版本，基于CentOS7.x的版本。</a>
+
 --------------
 
 2023年9月20，基于CentOS7.x的新版本1.1已经内测通过，2023年9月16日上线。
+
+## install
+```
+wget https://github.com/geektcp/UeCore/releases/download/1.3.0/UeCore-1.3.0-all.el7.centos.x86_64.rpm
+yum install UeCore-1.3.0-all.el7.centos.x86_64.rpm
+
 ```
 
 # notice
@@ -91,9 +154,9 @@ UeCore服务器将提供良好的游戏功能设计，游戏体验，
 我们一起改良它，让更多的人获得乐趣。
 
 ```
-<a href="http://everwar.cn/" target="_blank">UeCore魔兽世界帐号注册</a>
+<a href="http://uecore.org" target="_blank">UeCore魔兽世界帐号注册</a>
 ```
-http://wotlk.everwar.cn
+http://uecore.org
 ```
 
 ![登录入口](https://github.com/geektcp/UeCore/blob/master/screen/26.png)
@@ -195,14 +258,25 @@ https://github.com/geektcp/UeCore/releases/tag/1.0
 客户端使用1.12.x版本(60魔兽经典客户端)
 ```
 
+## Important Clarification
+
+UeCore has NO relation to Unreal Engine.
+
+- UE in UeCore does NOT mean Unreal Engine
+- UeCore is NOT "Unreal Engine Core"
+- UeCore is a World of Warcraft server engine project
+
+Please do not confuse this project with Epic Games' Unreal Engine.
+
+
 # doc
 
 - 官方技术文档地址
 ```
-http://doc.everwar.cn
+http://uecore.org
 ```
 
-<a href="http://doc.everwar.cn" target="_blank">UeCore开源魔兽世界官方技术文档地址</a>
+<a href="http://uecore.org" target="_blank">UeCore开源魔兽世界官方技术文档地址</a>
 
 
 # 界面截图

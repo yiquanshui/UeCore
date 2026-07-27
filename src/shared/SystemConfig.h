@@ -64,8 +64,8 @@
 #  define SYSCONFDIR        ""
 #endif
 
-#ifndef EVERWAR_VERSION
-#  define EVERWAR_VERSION        ""
+#ifndef UECORE_VERSION
+#  define UECORE_VERSION        ""
 #endif
 
 #if PLATFORM == PLATFORM_WINDOWS
@@ -74,8 +74,8 @@
 # else
 #  define _ENDIAN_PLATFORM "Win32 (" _ENDIAN_STRING ")"
 # endif
-# define _MANGOSD_CONFIG  SYSCONFDIR"mangosd.conf"
-# define _REALMD_CONFIG   SYSCONFDIR"realmd.conf"
+# define _WORLDSERVER_CONFIG  SYSCONFDIR"worldserver.conf"
+# define _AUTHSERVER_CONFIG   SYSCONFDIR"authserver.conf"
 # define _AUCTIONHOUSEBOT_CONFIG   SYSCONFDIR"ahbot.conf"
 #else
 # if defined  (__FreeBSD__)
@@ -93,12 +93,12 @@
 # else
 #  define _ENDIAN_PLATFORM "Unix_" ARCHITECTURE " (" _ENDIAN_STRING ")"
 # endif
-# define _MANGOSD_CONFIG  SYSCONFDIR"mangosd.conf"
-# define _REALMD_CONFIG  SYSCONFDIR"realmd.conf"
+# define _WORLDSERVER_CONFIG  SYSCONFDIR"worldserver.conf"
+# define _AUTHSERVER_CONFIG  SYSCONFDIR"authserver.conf"
 # define _AUCTIONHOUSEBOT_CONFIG   SYSCONFDIR"ahbot.conf"
 #endif
 
-#define _FULLVERSION(REVD,REVT,REVH) _PACKAGENAME "/" EVERWAR_VERSION " for " _ENDIAN_PLATFORM
+#define _FULLVERSION(REVD,REVT,REVH) _PACKAGENAME "/" UECORE_VERSION " for " _ENDIAN_PLATFORM
 
 #define DEFAULT_PLAYER_LIMIT 100
 #define DEFAULT_WORLDSERVER_PORT 8085                       //8129
